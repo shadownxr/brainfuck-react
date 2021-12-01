@@ -1,0 +1,1 @@
+C:\Users\shado\OneDrive\Dokumenty\Rust\brainfuck\target\release\brainfuck.exe: C:\Users\shado\OneDrive\Dokumenty\Rust\brainfuck\src\interpreter\memctrl.rs C:\Users\shado\OneDrive\Dokumenty\Rust\brainfuck\src\interpreter.rs C:\Users\shado\OneDrive\Dokumenty\Rust\brainfuck\src\main.rs
