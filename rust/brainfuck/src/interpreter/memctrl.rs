@@ -32,8 +32,8 @@ impl MemCtrl {
         }
     }
 
-    pub fn print_char(&self){
-        print!("{}",self.memory[self.pointer] as char);
+    pub fn print_char(&self, output: &mut String){
+        output.push(self.memory[self.pointer] as char);
     }
 
     pub fn put_char(&mut self, buffer: char){

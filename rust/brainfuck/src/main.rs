@@ -16,3 +16,11 @@ pub fn main() {
 pub fn add_two_ints(a: u32, b: u32) -> u32 {
    a + b
 }
+
+#[wasm_bindgen]
+pub fn brainfuck(code: String, input: String) -> String {
+    let mut init = interpreter::Interpreter::new();
+    init.read_code(code);
+    init.get_input(input);
+    init.interpret()
+}

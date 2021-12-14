@@ -24,7 +24,7 @@ impl Interpreter {
         }
     }
 
-    pub fn read_code(&mut self, path: String) {
+    /*pub fn read_code(&mut self, path: String) {
         let code_buffer = fs::read_to_string(path).expect("Couldn't read the file!");
         if code_buffer.is_ascii() != true{
             panic!("Non ascii character found!");
@@ -34,16 +34,32 @@ impl Interpreter {
                 self.code.push(i);
             }
         }
+    }*/
+
+    pub fn read_code(&mut self, code: String) {
+        if code.is_ascii() != true{
+            panic!("Non ascii character found!");
+        }
+        for i in code.chars() {
+            if i ==  '+' || i == '-' || i == '.' || i == ',' || i == '[' || i == ']' || i == '>' || i == '<'  {
+                self.code.push(i);
+            }
+        }
     }
 
-    pub fn get_input(&mut self){
+    /*pub fn get_input(&mut self){
         println!("Program input:");
         io::stdin().read_line(&mut self.input_buffer).expect("Unable to read input!");
+    }*/
+
+    pub fn get_input(&mut self, input: String){
+        self.input_buffer = input;
     }
 
-    pub fn interpret(&mut self) {
+    pub fn interpret(&mut self) -> String {
         let mut input = self.input_buffer.chars();
-        
+        let mut output = String::new();
+
         while self.code.len() != self.pointer  {
             //println!("{}", self.code[self.pointer]);
             //println!("{}", self.pointer);
@@ -66,7 +82,7 @@ impl Interpreter {
                 }
 
                 '.' => {
-                    self.memory.print_char();
+                    self.memory.print_char(&mut output);
                 }
 
                 ',' => {
@@ -102,6 +118,7 @@ impl Interpreter {
             }
             self.pointer = self.pointer + 1;
         }
+        output
     }
 
     pub fn debug(&self){
