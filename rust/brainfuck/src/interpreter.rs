@@ -1,8 +1,5 @@
 pub mod memctrl;
 
-use std::fs;
-use std::io;
-
 pub struct Interpreter {
     memory: memctrl::MemCtrl,
     input_buffer: String,
@@ -121,7 +118,15 @@ impl Interpreter {
         output
     }
 
-    pub fn debug(&self){
+    pub fn debug(self){
         self.memory.debug();
+    }
+
+    pub fn memory_data(self) -> Vec<u8>{
+        self.memory.memory_data()
+    }
+
+    pub fn memory_pointer(self) -> usize{
+        self.memory.memory_pointer()
     }
 }

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import TextField from '@mui/material/TextField';
 
-export function Output() {
-    const [output, setOutput] = useState("");
+interface Output {
+    output:string;
+}
 
+export function Output(props:Output) {
     return(
-        <div>{output}</div>
+        <TextField label='Output' InputLabelProps={{shrink: true}} margin='dense' size='small' defaultValue={props.output} fullWidth inputProps={{readOnly: true}} sx={{height: '100%'}} multiline={true} minRows={11}/>
     )
 } 

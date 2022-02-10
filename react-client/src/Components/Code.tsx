@@ -1,29 +1,31 @@
-import React, { ChangeEvent, useState } from 'react'
+import React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 interface CodeProps {
-    texfun(code: string): void;
+    texfun(code: string, input: string): void;
+}
+
+interface FormElements extends HTMLFormControlsCollection {
+    CodeField: HTMLInputElement;
+    InputField: HTMLInputElement;
+}
+
+interface CodeField extends HTMLFormElement {
+   readonly elements: FormElements
 }
 
 export function Code(Props: CodeProps) {
-    const [codearea, setCodearea] = useState("");
-
-    const handleInterpret = () => {
-        Props.texfun(codearea);
-    }
-
-    const handleCode = (e: ChangeEvent<HTMLInputElement>) => {
-        setCodearea(e.currentTarget.value);
+    const handleInterpret = (e: React.FormEvent<CodeField>) => {
+        e.preventDefault();
+        Props.texfun(e.currentTarget.elements.CodeField.value, e.currentTarget.elements.InputField.value);
     }
 
     return(
-        <div>
-            <form>
-                <TextField type="text" id="codefield" onChange={handleCode} />
-                <Button variant="contained" onClick = {() => handleInterpret()}>Interpret</Button>
-            </form>
-            Działa
-        </div>
+        <form onSubmit={handleInterpret} style={{width: '100%', height: '100%'}}>
+            <TextField type="text" label="Code" margin='dense' size="small" id="CodeField" fullWidth minRows={24} multiline={true}/>
+            <TextField type="text" label="Input" margin='dense' size="small" id="InputField" sx={{width: '89%', marginRight: 1}} />
+            <Button variant="contained" type="submit" sx={{width: '10%', marginTop: 1}}>Run</Button>
+        </form>
     )
 }

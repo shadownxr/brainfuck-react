@@ -3,6 +3,7 @@ pub struct MemCtrl {
     pointer: usize,
 }
 
+
 impl MemCtrl {
     pub fn new() -> MemCtrl {
         MemCtrl {
@@ -46,8 +47,16 @@ impl MemCtrl {
         if self.memory[self.pointer] == 0 {true} else {false}
     }
 
-    pub fn debug(&self){
+    pub fn debug(self){
         println!("Vector = {:?}, Pointer = {}", self.memory, self.pointer);
+    }
+
+    pub fn memory_data(self) -> Vec<u8>{
+        self.memory
+    }
+
+    pub fn memory_pointer(self) -> usize{
+        self.pointer
     }
 }
 

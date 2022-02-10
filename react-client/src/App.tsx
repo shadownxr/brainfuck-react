@@ -1,35 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Code } from './Components/Code';
+import { Memory } from './Components/Memory';
+import { Output } from './Components/Output';
+import Box from '@mui/material/Box';
 
 function App() {
-   const [code, setCode] = useState<string>("");
+   const [code, setCode] = useState<string>("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.");
    const [output, setOutput] = useState<string>("");
-   const [text, setText] = useState<string>("code");
+   const [input, setInput] = useState<string>("");
+   const [memory, setMemory] = useState<Array<number>>([0]);
 
    useEffect(() => {
-      setCode("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.");
-      //console.log(text);
-      });
+         import('wasm').then(({brainfuck}) => {
+            let bf = brainfuck(code,input);
+            setOutput(bf.output);
+            console.log(output);
+            //setMemory(bf.memory);
+            console.log(memory);
+         });
+      },[code, input]);
 
-   const textcallback = (t: string):void => {
-      setText(t);
-      console.log(text);
+   const codeCallback = (c: string, i: string):void => {
+      setCode(c);
+      setInput(i);
    }
 
-   import('wasm').then(({ add_two_ints, brainfuck}) => {
-      const sumResult = add_two_ints(10, 20);
-      setOutput(brainfuck(code,""));
-      setSum(sumResult);
-  });
-   const [sum, setSum] = useState<number>(0);
    return (
-      // I cut out the fluff
-      // Displaying our sum and fib values that're updated by WASM
-      <div className="App" >
-         <div>Output: {output}</div>
-         <Code texfun = {textcallback}/>
-      </div>
+      <Box sx={{
+         display: 'grid', 
+         gridTemplateColumns: 'repeat(4, 1fr)', 
+         gridTemplateRows: '62% 8% 30%', 
+         gridTemplateAreas: `"code code code memory" "code code code info" "output output output info"`, 
+         height: '100vh',
+         backgroundColor: 'white'
+      }}>
+         <Box sx={{ gridArea: 'code', m: 1}}>
+            <Code texfun = {codeCallback}/>
+         </Box>
+         <Box sx={{ gridArea: 'memory', m: 1}}><Memory/></Box>
+         <Box sx={{ gridArea: 'output', m: 1, marginTop: -1}}><Output output={output}/></Box>
+         <Box sx={{ gridArea: 'info', m: 1, marginTop: 2, marginBottom: 2, border: 1}}>Info</Box>
+      </Box>
    );
 }
 export default App;
