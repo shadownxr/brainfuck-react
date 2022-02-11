@@ -3,6 +3,7 @@ import './App.css';
 import { Code } from './Components/Code';
 import { Memory } from './Components/Memory';
 import { Output } from './Components/Output';
+import { Info } from './Components/Info';
 import Box from '@mui/material/Box';
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
             console.log(output);
             console.log(memory);
          });
-      },[code, input, memoryRef]);
+      },[code, input, memoryRef, output]);
 
    const codeCallback = (c: string, i: string):void => {
       setCode(c);
@@ -40,9 +41,9 @@ function App() {
          <Box sx={{ gridArea: 'code', m: 1}}>
             <Code texfun = {codeCallback}/>
          </Box>
-         <Box sx={{ gridArea: 'memory', m: 1}}><Memory/></Box>
+         <Box sx={{ gridArea: 'memory', m: 1, border: 1, marginTop: 2}}><Memory memory={memory}/></Box>
          <Box sx={{ gridArea: 'output', m: 1, marginTop: -1}}><Output output={output}/></Box>
-         <Box sx={{ gridArea: 'info', m: 1, marginTop: 2, marginBottom: 2, border: 1}}>Info</Box>
+         <Box sx={{ gridArea: 'info', m: 1, marginTop: 2, marginBottom: 2, border: 1}}><Info/></Box>
       </Box>
    );
 }

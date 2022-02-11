@@ -2,25 +2,3 @@ html, body {
   margin: 0px;
   height: 100%;
 }
-
-.code {
-  background-color: red;
-}
-
-.memory {
-  background-color: blue;
-}
-
-.output {
-  background-color: yellow;
-}
-
-.container {
-  height: 100vh;
-  display: grid;
-  grid-template-columns: [first] 50% [second] auto [end];
-  grid-template-rows: [row1-start] 65% [row1-end] auto [last-line];
-  grid-template-areas: 
-    "code memory" 
-    "output output";
-}
