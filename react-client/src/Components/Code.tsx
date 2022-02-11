@@ -23,7 +23,7 @@ export function Code(Props: CodeProps) {
 
     return(
         <form onSubmit={handleInterpret} style={{width: '100%', height: '100%'}}>
-            <TextField type="text" label="Code" margin='dense' size="small" id="CodeField" fullWidth minRows={24} multiline={true}/>
+            <TextField type="text" label="Code" margin='dense' defaultValue={"++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++."} size="small" id="CodeField" fullWidth minRows={24} multiline={true}/>
             <TextField type="text" label="Input" margin='dense' size="small" id="InputField" sx={{width: '89%', marginRight: 1}} />
             <Button variant="contained" type="submit" sx={{width: '10%', marginTop: 1}}>Run</Button>
         </form>

@@ -5,8 +5,7 @@ mod interpreter;
 #[derive(Serialize, Deserialize)]
 pub struct InterpretData {
     pub output: String,
-    pub memory: [u8; 10],
-    pub pointer: usize,
+    pub memory: Vec<u8>,
 }
 
 #[wasm_bindgen]
@@ -27,11 +26,9 @@ pub fn brainfuck(code: String, input: String) -> JsValue {
     init.get_input(input);
     let output = init.interpret();
     let memory = init.memory_data();
-    //let pointer = init.memory_pointer();
     let interpretdata = InterpretData {
         output: output,
-        memory: [1,2,3,4,5,6,7,8,9,0],
-        pointer: 0,
+        memory: memory,
     };
     JsValue::from_serde(&interpretdata).unwrap()
 }

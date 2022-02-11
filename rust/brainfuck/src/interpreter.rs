@@ -125,8 +125,4 @@ impl Interpreter {
     pub fn memory_data(self) -> Vec<u8>{
         self.memory.memory_data()
     }
-
-    pub fn memory_pointer(self) -> usize{
-        self.memory.memory_pointer()
-    }
 }

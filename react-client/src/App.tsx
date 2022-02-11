@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import { Code } from './Components/Code';
 import { Memory } from './Components/Memory';
@@ -9,17 +9,19 @@ function App() {
    const [code, setCode] = useState<string>("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.");
    const [output, setOutput] = useState<string>("");
    const [input, setInput] = useState<string>("");
-   const [memory, setMemory] = useState<Array<number>>([0]);
+   const [memory, setMemory] = useState<Array<number>>([0, 0, 72, 100, 87, 33, 10]);
+
+   const memoryRef = useRef(memory);
 
    useEffect(() => {
          import('wasm').then(({brainfuck}) => {
             let bf = brainfuck(code,input);
             setOutput(bf.output);
+            setMemory(bf.memory);
             console.log(output);
-            //setMemory(bf.memory);
             console.log(memory);
          });
-      },[code, input]);
+      },[code, input, memoryRef]);
 
    const codeCallback = (c: string, i: string):void => {
       setCode(c);

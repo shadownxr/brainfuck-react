@@ -54,10 +54,6 @@ impl MemCtrl {
     pub fn memory_data(self) -> Vec<u8>{
         self.memory
     }
-
-    pub fn memory_pointer(self) -> usize{
-        self.pointer
-    }
 }
 
 
